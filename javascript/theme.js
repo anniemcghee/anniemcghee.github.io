@@ -40,7 +40,7 @@ jQuery(function($) {
 	// Add scroll animation on anchor links
 
 	$('.nav-menu a[href*=#]:not([href=#])').click(function() {
-	  if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') 
+	  if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'')
 	      || location.hostname === this.hostname) {
 	    var target = $(this.hash);
 	    var href = $.attr(this, 'href');
@@ -86,29 +86,29 @@ jQuery(function($) {
 		});
 	}
 
-	if( $('.portfolio-ajax').length ) {
-		$('.portfolio-ajax a').on('click', function(e) {
-			$.ajax({
-			  url: $(this).attr('href'),
-			  cache: false,
-			  success: function(html) {
-			    $('body').append('<div class="portfolio-content">' + html + '</div>');
+	// if( $('.portfolio-ajax').length ) {
+	// 	$('.portfolio-ajax a').on('click', function(e) {
+	// 		$.ajax({
+	// 		  url: $(this).attr('href'),
+	// 		  cache: false,
+	// 		  success: function(html) {
+	// 		    $('body').append('<div class="portfolio-content">' + html + '</div>');
 
-				$('.porftolio-post-close').on('click', function() {
-					$('body').removeClass('portfolio-ajax-active');
-				});
+	// 			$('.porftolio-post-close').on('click', function() {
+	// 				$('body').removeClass('portfolio-ajax-active');
+	// 			});
 
-			    $('portfolio-content').imagesLoaded(function() {
-					$('body').addClass('portfolio-ajax-active');
-			    });
-			    
-			  }
-			});
+	// 		    $('portfolio-content').imagesLoaded(function() {
+	// 				$('body').addClass('portfolio-ajax-active');
+	// 		    });
 
-			e.preventDefault(); 
-			return false;
-		});
-	}
+	// 		  }
+	// 		});
+
+	// 		e.preventDefault();
+	// 		return false;
+	// 	});
+	// }
 
 	/*-----------------------------------------------------------------------------------*/
 	/*	04. VIDEOS (for background video, either from YouTube or using the video element)
@@ -234,7 +234,7 @@ jQuery(function($) {
 		formElement.validate({
 			 submitHandler: function(form) {
 			 	$('#contact-form-message').remove();
-			 	
+
 		        try {
 					$.ajax({
 						type: 'POST',
@@ -252,10 +252,10 @@ jQuery(function($) {
 		});
 	}
 
-	$('form[data-form="submit"] input').keypress(function (e) {		
+	$('form[data-form="submit"] input').keypress(function (e) {
 		if (e.which == 13) {
 			$(this).parent().submit();
-			e.preventDefault(); 
+			e.preventDefault();
 			return false;
 		}
 	});
