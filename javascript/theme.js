@@ -86,34 +86,6 @@ jQuery(function($) {
 		});
 	}
 
-	// if( $('.portfolio-ajax').length ) {
-	// 	$('.portfolio-ajax a').on('click', function(e) {
-	// 		$.ajax({
-	// 		  url: $(this).attr('href'),
-	// 		  cache: false,
-	// 		  success: function(html) {
-	// 		    $('body').append('<div class="portfolio-content">' + html + '</div>');
-
-	// 			$('.porftolio-post-close').on('click', function() {
-	// 				$('body').removeClass('portfolio-ajax-active');
-	// 			});
-
-	// 		    $('portfolio-content').imagesLoaded(function() {
-	// 				$('body').addClass('portfolio-ajax-active');
-	// 		    });
-
-	// 		  }
-	// 		});
-
-	// 		e.preventDefault();
-	// 		return false;
-	// 	});
-	// }
-
-	/*-----------------------------------------------------------------------------------*/
-	/*	04. VIDEOS (for background video, either from YouTube or using the video element)
-	/*-----------------------------------------------------------------------------------*/
-
 	$(".player").mb_YTPlayer();
 
 	$(".video video").prop("volume", 0);
@@ -131,70 +103,7 @@ jQuery(function($) {
 		autoplaySpeed: 5000
 	});
 
-	/*-----------------------------------------------------------------------------------*/
-	/*	06. INSTAGRAM
-	/*-----------------------------------------------------------------------------------*/
 
-	$('.instagram').on('didLoadInstagram', function(event, response) {
-		var instagram = {};
-		var $url = 'https://api.instagram.com/v1/users/' + response.data[0].id.split('_')[1] + '/?access_token=1554589859.71ed503.20f8b92a2d31453a97db5384e33ce3f9';
-
-		$.ajax({
-			method : "GET",
-			url : $url,
-			dataType : "jsonp",
-			jsonp : "callback",
-			success : function(dataSuccess) {
-				instagram.authorPhoto = dataSuccess.data.profile_picture;
-				instagram.followers = dataSuccess.data.counts.followed_by;
-				instagram.photos = dataSuccess.data.counts.media;
-				instagram.username = dataSuccess.data.username;
-				instagram.full_name = dataSuccess.data.full_name;
-
-				var data = response.data;
-				var tagNames = [];
-				var tagNums = [];
-				var tags = [];
-				instagram.target = event.currentTarget.id;
-				instagram.likes = 0;
-
-				for(var i=0; i<data.length; i++) {
-					instagram.likes += data[i].likes.count;
-
-					/* Get tag names and how many are there */
-					for(var j=0; j<data[i].tags.length; j++) {
-						if(tagNames.indexOf(data[i].tags[j]) === -1) {
-							tagNames.push(data[i].tags[j]);
-							tagNums.push(1);
-						} else {
-							tagNums[tagNames.indexOf(data[i].tags[j])]++;
-						}
-					}
-				};
-
-				/* Sort tags array */
-				for (var i = 0; i < tagNames.length; i++) { tags.push({ 'name': tagNames[i], 'value': tagNums[i] }); }
-				tags.sort(function(a, b) { return b.value - a.value; });
-
-				/* Add instagram photos */
-
-				for(var i=0; i<12; i++) {
-					$("#" + instagram.target + ' .instagram-images').append('<li style="background-image: url(' + data[i].images.low_resolution.url + ')"></li>');
-				}
-
-				/* Add Instagram User Information */
-				$("#" + instagram.target + ' .instagram-author-photo').append('<img src="' + instagram.authorPhoto + '" alt="' + instagram.full_name + '" />');
-				for(var i=0; i<4; i++) {
-					$("#" + instagram.target + ' .instagram-tags').append('<a href="http://www.enjoygram.com/tag/' + tags[i].name + '" target="_blank">#' + tags[i].name + '</a> ');
-				}
-				$("#" + instagram.target + ' .instagram-author-tag').append('<a href="http://instagram.com/' + instagram.username + '" target="_blank">#' + instagram.username + '</a>');
-				$("#" + instagram.target + ' .num-photos span').html(instagram.photos);
-				$("#" + instagram.target + ' .num-followers span').html(instagram.followers);
-				$("#" + instagram.target + ' .num-likes span').html(instagram.likes);
-				$("#" + instagram.target + ' .instagram-follow').attr('href', 'http://instagram.com/' + instagram.username);
-			}
-		});
-	});
 
 	/*-----------------------------------------------------------------------------------*/
 	/*	07. BLOG MASONRY
